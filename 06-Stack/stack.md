@@ -474,7 +474,7 @@ function nge(arr){
 }
 ```
 
-#### 4. Prev greater element
+#### 4. Prev smaller element
 
 > 1. reverse the array and use above approach and reverse the output arr
 > 2. approach 2 -> traverse from last and use above approach with slight change logic
@@ -482,3 +482,62 @@ function nge(arr){
 #### 5. Stock span
 
 Link: `https://www.geeksforgeeks.org/the-stock-span-problem/`
+
+![1695918929581](image/stack/1695918929581.png)
+
+> 1. for any ith day if we calculate prev greater ele (first ele to left of i having val> ass[i])
+> 2. span = index-index of prev greater ele
+
+```
+
+```
+
+#### 5. Sum of Subarray Minimus
+
+Link: `https://leetcode.com/problems/sum-of-subarray-minimums/`
+
+![1695919828289](image/stack/1695919828289.png)
+
+Brute force: To calculate all possible sub arrays -> T-> O(n^2)
+
+> 1. One single ele can be minimum of multiple sub arrays
+> 2. For how many subarrays 1/particular ele will be min
+> 3. For any ele x to be the min, we need to make sure all other ele are greater
+> 4.
+> 5. ![1695923714241](image/stack/1695923714241.png)
+> 6. ![1695923840698](image/stack/1695923840698.png)
+> 7. ![1695924028080](image/stack/1695924028080.png)
+
+#### 6. Largest Rectangle in Histogram
+
+Link: ``
+
+CPP code
+
+```
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        heights.push_back(0);
+        int n=heights.size();
+        stack<int> st;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            while(!st.empty() && heights[st.top()]>heights[i]){
+                int t=st.top();
+                int h=heights[t];
+                st.pop();
+                if(st.empty()){
+                    ans=max(ans,h*i);
+                }
+                else{
+                    int len=i-st.top()-1;
+                    ans=max(ans,h*len);
+                }
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+};
+```
