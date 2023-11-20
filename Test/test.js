@@ -77,3 +77,5 @@
 // for (var k = 0; k < 5; k++) {
 //   setTimeout(f(k), 1000);
 // }
+// console.log(3 > 2 > 1);
+// console.log(011 + 1);

@@ -492,7 +492,7 @@ Link: `https://www.geeksforgeeks.org/the-stock-span-problem/`
 
 ```
 
-#### 5. Sum of Subarray Minimus
+#### 6 . Sum of Subarray Minimus
 
 Link: `https://leetcode.com/problems/sum-of-subarray-minimums/`
 
@@ -508,9 +508,9 @@ Brute force: To calculate all possible sub arrays -> T-> O(n^2)
 > 6. ![1695923840698](image/stack/1695923840698.png)
 > 7. ![1695924028080](image/stack/1695924028080.png)
 
-#### 6. Largest Rectangle in Histogram
+#### 7. Largest Rectangle in Histogram
 
-Link: ``
+Link: `https://leetcode.com/problems/largest-rectangle-in-histogram/description/Description/`
 
 CPP code
 
