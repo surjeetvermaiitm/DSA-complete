@@ -21,7 +21,7 @@ public:
                 int val=it->first;
                 if(it->second==1){
                     v.push_back(val);
-                    it=freq.erase(it);
+                    it=freq.erase(it);//vvi
                 }else{
                     v.push_back(val);
                     freq[val]--;
