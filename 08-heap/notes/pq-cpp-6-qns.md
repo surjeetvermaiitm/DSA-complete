@@ -172,3 +172,73 @@ public:
     }
 };
 ```
+
+Qn 4. Min Operators to halve array sum
+
+Link: https://leetcode.com/problems/minimum-operations-to-halve-array-sum/
+
+```cpp
+class Solution {
+public:
+    int halveArray(vector<int>& nums) {
+        priority_queue<double> pq;
+        double total=0;
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            total+=nums[i];
+            pq.push(nums[i]*1.0);
+        }
+        double required_sum=total/2.0;
+        while(total>required_sum and not pq.empty()){
+            double el=pq.top();
+            pq.pop();
+            total-=el/2.0;
+            pq.push(el/2.0);
+            ans++;
+
+        }
+        return ans;
+
+    }
+};
+```
+
+Qn 5. Maximum performance of a team
+Link: https://leetcode.com/problems/maximum-performance-of-a-team/
+
+```cpp
+#define pp pair<int,int>
+
+bool cmp(pp p1,pp p2){
+    return p1.first>p2.first;
+}
+
+class Solution {
+public:
+    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
+        vector<pp> v;
+        for(int i=0;i<n;i++){
+            v.push_back({efficiency[i],speed[i]});
+        }
+        sort(v.begin(),v.end(),cmp);
+        long long int ts=0;
+        priority_queue<pp,vector<pp>,greater<pp>> pq;
+        long long int ans=0;
+        for(int i=0;i<n;i++){
+            if(pq.size()==k){
+                ts-=pq.top().first;
+                pq.pop();
+            }
+            pq.push({v[i].second,v[i].first});
+            ts+=v[i].second;
+            ans=max(ans,(long long int)ts*v[i].first);
+        }
+        return ans % 1000000007;
+
+    }
+};
+
+```
+
+Qn 6. Furthest building you can reach
+Link: https://leetcode.com/problems/furthest-building-you-can-reach/
