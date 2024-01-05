@@ -38,4 +38,4 @@ public:
 };
 ```
 
-2.
+2. Fractional knapsack
