@@ -12,7 +12,7 @@ bool cmp(pair<int,int> &p1,pair<int,int> &p2){
 
     return r1>r2; // decreasing order
 }
-
+//T -> O(nlogn)
 double fractionalKnapsack(vector<int> &profit,vector<int> &weights,int n,int W){
     vector<pair<int,int>> arr;
     for(int i=0;i<n;i++){
