@@ -150,3 +150,189 @@ public:
 
 };
 ```
+
+```cpp
+class Solution {
+public:
+    int numRescueBoats(vector<int>& people, int limit) {
+
+
+        sort(people.begin(),people.end());
+
+        int i = 0, j = people.size() - 1,boat = 0;
+
+        while(i <= j){
+            if(people[i] + people[j] <= limit){
+                i++;
+                j--;
+            }
+            else{
+                j--;
+            }
+            boat++;
+        }
+        return boat;
+    }
+
+};
+```
+
+### Qn 5. Minimum Product Subset
+
+arr -> -ve , +ve, 0
+n-> 10^5
+subset whose product is minimum. Return the product. (not subset)
+
+eg. [-1,-1,-2,4,3] = -24
+[-5,0]=-5
+[-9,0,-4,-3]=-60
+
+brute force -> 2^n
+
+greedy:
+no negative ->
+
+- zero available -> ans =0
+- zero not available -> ans= min positive val
+
+we have negative
+
+- even number of -ve -> product of all -ve except the largest -ve ele
+- odd number of -ve -> ans = product of all -ve x product of all +ve
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minProduct(vector<int> &arr){
+    int cn=0;
+    int cz=0;
+    int cp=0;
+    int prod_pos=1;
+    int prod_neg=1;
+    int largestNegative=INT_MIN;
+
+    for(int i=0;i<arr.size();i++){
+        if(arr[i]<0) {
+            cn++;
+            prod_neg*=arr[i];
+            largestNegative=max(largestNegative,arr[i]);
+        }
+        if(arr[i]>0){
+            cp++;
+            prod_pos*=arr[i];
+        };
+        if(arr[i]==0) cz++;
+    }
+    if(cn==0){
+        if(cz>0) return 0;
+        else{
+            return *min_element(arr.begin(),arr.end());
+        }
+    }else{
+        if(cn%2==0){
+            //even
+            return (prod_neg/largestNegative)*prod_pos;
+        }else{
+            //odd
+            return prod_neg*prod_pos;
+        }
+    }
+}
+```
+
+### Qn 6. Minimum Cost to cut a board into square
+
+Link: https://www.geeksforgeeks.org/minimum-cost-cut-board-squares/
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+
+bool cmp(int x,inty){
+    return x>y;
+}
+
+//T -> mlogm + nlogn
+//space -> O(1)
+//sort and 2 pointer
+ll minCostToBreakGrid(int n,int m,vector<ll> &vertical,vector<ll>&horizontal){
+    sort(vertical.begin(),vertical.end(),cmp);//desc
+    sort(horizontal.begin(),horizontal.end(),cmp);
+    int hz=1,vr=1;
+    int h=0;
+    int v=0;
+    ll ans=0;
+    while(h<horizontal.size() and v<vertical.size()){
+        if(vertical[v]>horizontal[h]){
+            ans+=vertical[v]*vr;
+            hz++;
+            v++;
+        }else{
+            ans+=horizontal[h]*hz;
+            vr++;
+            h++;
+        }
+    }
+    while(h<horizontal.size()){
+        ans+=horizontal[h]*hz;
+            vr++;
+            h++;
+    }
+    while(v<vertical.size()){
+       ans+=vertical[v]*vr;
+        hz++;
+        v++;
+    }
+    return ans;
+
+
+}
+```
+
+### Qn 7. COnstruct string with repeat limit
+
+//Link: https://leetcode.com/problems/construct-string-with-repeat-limit/
+
+```cpp
+class Solution {
+public:
+    string repeatLimitedString(string s, int repeatLimit) {
+        unordered_map<char,int> mp;
+        for(int i=0;i<s.size();i++){
+            mp[s[i]]++;
+        }
+        priority_queue<pair<char,int>> pq;
+        for(auto p:mp){
+            pq.push(p);
+        }
+        string res="";
+        while(!pq.empty()){
+            auto largest=pq.top();
+            pq.pop();
+            int len=min(repeatLimit,largest.second);
+            for(int i=0;i<len;i++){
+                res+=largest.first;
+            }
+            pair<char,int> secondLargest;
+            if(largest.second-len>0){
+                if(!pq.empty()){
+                    secondLargest=pq.top();
+                    pq.pop();
+                    res+=secondLargest.first;
+                }else{
+                    return res;
+                }
+                if(secondLargest.second-1>0){
+                    pq.push({secondLargest.first,secondLargest.second-1});
+                }
+                pq.push({largest.first,largest.second-len});
+            }
+        }
+        return res;
+
+
+    }
+};
+```
