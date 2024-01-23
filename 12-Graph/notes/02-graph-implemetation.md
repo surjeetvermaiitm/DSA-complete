@@ -34,6 +34,81 @@ Traditional Approach
 - Neighbour: Any node having direct edge from a vertex
   > What about directed and undirected weighted graph: Instead of storing an integer in the LL, we can store a pair. first->(neighbour),second->(weight of neighbour)
 
+```CPP
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<list<int>> graph;
+int v;//no of vertices
+void add_edge(int src,int dest, bool bi_dir=true){
+    graph[src].push_back(dest);
+    if(bi_dir){
+        graph[dest].push_back(src);
+    }
+}
+void display(){
+    for(int i=0;i<graph.size();i++){
+        cout<<i<<" --> "
+        for(auto el:graph[i]){
+            cout<<el<<" , ";
+        }
+        cout<<endl;
+    }
+}
+
+int main(){
+    cin>>v;
+    graph.resize(v,list<int>());
+    int e;
+    cin>>e;
+    while(e--){
+       int s,d;
+       cin>>s>>d;
+       add_edge(s,d);
+    }
+    return 0;
+}
+
+```
+
+weighted adjacency list
+
+```CPP
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<list<pair<int,int>>> graph;
+int v;//no of vertices
+void add_edge(int src,int dest,int wt, bool bi_dir=true){
+    graph[src].push_back({dest,wt});
+    if(bi_dir){
+        graph[dest].push_back({src,wt});
+    }
+}
+void display(){
+    for(int i=0;i<graph.size();i++){
+        cout<<i<<" --> "
+        for(auto el:graph[i]){
+            cout<<"("<<el.first<<" "<<el.second<<") , ";
+        }
+        cout<<endl;
+    }
+}
+
+int main(){
+    cin>>v;
+    graph.resize(v,list<pair<int,int>>());
+    int e;
+    cin>>e;
+    while(e--){
+       int s,d,wt;
+       cin>>s>>d>>wt;
+       add_edge(s,d,wt);
+    }
+    return 0;
+}
+```
+
 #### 3. Adjacency Map
 
 - Array of unordered map
@@ -42,6 +117,42 @@ Traditional Approach
 - Any ith index of the array represent data of ith vertices
 - v1:{{v3,w3},{v2,w2}}
 - To find whether any vertex is neighbour of another vertex or not?
+
+```CPP
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<unordered_map<int,int>> graph;
+int v;//no of vertices
+void add_edge(int src,int dest,int wt, bool bi_dir=true){
+    graph[src][dest]=wt;
+    if(bi_dir){
+         graph[dest][src]=wt;
+    }
+}
+void display(){
+    for(int i=0;i<graph.size();i++){
+        cout<<i<<" --> "
+        for(auto el:graph[i]){
+            cout<<"("<<el.first<<" "<<el.second<<") , ";
+        }
+        cout<<endl;
+    }
+}
+
+int main(){
+    cin>>v;
+    graph.resize(v,unordered_map<int,int>());
+    int e;
+    cin>>e;
+    while(e--){
+       int s,d,wt;
+       cin>>s>>d>>wt;
+       add_edge(s,d,wt);
+    }
+    return 0;
+}
+```
 
 #### 4. Adjacency Matrix
 
