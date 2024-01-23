@@ -21,3 +21,27 @@ proof: A,B,C,D here D have two choice (i D decide to go single, ii D decide to p
 
 f(n)=returns the no. of ways such that n friends can go party
 f(n-1) = when nth friend decided to go single
+nth decision to pair -> nth friend can choose any one from the remaining (n-1) friends. nth friend can choose in (n-1)C1 ways and remaining will go in f(n-2) ways
+so
+f(n) = f(n - 1) + (n - 1) \* f(n - 2)
+
+```CPP
+#include <bits/stdc++.h>
+using namespace std;
+
+int f(n){
+    if(n<=2) return n;
+    return f(n-1)+(n-1)*f(n-2);
+
+}
+
+int main(){
+    int n;
+    cin>>n;
+    cout<<f(n)<<endl;
+    return 0;
+}
+```
+
+Q3. Lexicographical numbers
+Link: https://leetcode.com/problems/lexicographical-numbers/description/
