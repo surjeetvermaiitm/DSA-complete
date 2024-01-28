@@ -64,3 +64,7 @@ Applications:
 - Connected Graph: |E|=|V|-1 (min)
 - Undirected Complete Graph: |E|=|v| C 2 (max)
 - Directed Complete Graph: |E|=|v|\*(|v|-1) (max)
+
+#### Connected components
+
+- It is a subset of the given graph that has vertices between which there is always a path.
