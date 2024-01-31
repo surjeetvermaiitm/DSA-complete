@@ -1,0 +1,1 @@
+//Link: https://www.spoj.com/problems/MCOINS/#:~:text=MCOINS%20%2D%20Coins%20Game&text=They%20choose%20two%20different%20positive,L%20coins%20from%20the%20tower.
