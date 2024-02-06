@@ -197,3 +197,91 @@ public:
 #### Qn.5 Mcoins coins game (SPOJ)
 
 Link: https://www.spoj.com/problems/MCOINS/#:~:text=MCOINS%20%2D%20Coins%20Game&text=They%20choose%20two%20different%20positive,L%20coins%20from%20the%20tower.
+
+f(n,k,l)= !(f(n-1,k,l) && f(n-k,k,l) && f(n-l,k,l))
+where f(n,k,l) is whether having n coins is a losing or a winning state
+0-> loosing
+1-> winning
+
+Base case: if(n==1) retrun 1
+if(n==k) return 1
+if(n==l) return 1
+
+```CPP
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int k, l, m;
+    // m-> no of games
+    cin>>k>>l>>m;
+
+    vector<bool> dp(1000005, 0);
+
+    dp[1] = 1;
+    dp[k] = 1;
+    dp[l] = 1;
+
+    for(int i = 2; i <= 1000000; i++) {
+        if(i == k or i == l) continue;
+
+        dp[i] = !(dp[i-1] and ((i - k >= 1) ? dp[i-k] : 1) and ((i - l >= 1)  ? dp[i-l] : 1));
+    }
+
+    for(int i = 0; i < m; i++) {
+        int n;
+        cin>>n;
+        if(dp[n] == 1 ){
+            // n-> winning state
+            cout<<"A";
+        } else {
+            // n-> loosing state
+            cout<<"B";
+        }
+    }
+
+    return 0;
+}
+```
+
+### 2D DP
+
+#### Q1. Vacation atcoder
+
+Link: https://atcoder.jp/contests/dp/tasks/dp_c
+
+```CPP
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cin>>n;
+    vector<vector<int> > dp(n, vector<int> (3, 0));
+
+
+    // base case
+    int a, b, c; // a->0, b->1, c->2
+    cin>>a>>b>>c;
+    dp[0][0] = a;
+    dp[0][1] = b;
+    dp[0][2] = c;
+
+    for(int i = 1; i < n; i++) {
+        // input of happiness for ith day
+        cin>>a>>b>>c;
+        // ith day -> a
+        dp[i][0] = a + max(dp[i-1][1], dp[i-1][2]);
+        // ith day -> b
+        dp[i][1] = b + max(dp[i-1][0], dp[i-1][2]);
+        // ith day -> c
+        dp[i][2] = c + max(dp[i-1][0], dp[i-1][1]);
+    }
+
+    cout<<max({dp[n-1][0], dp[n-1][1], dp[n-1][2]});
+
+    return 0;
+}
+```
