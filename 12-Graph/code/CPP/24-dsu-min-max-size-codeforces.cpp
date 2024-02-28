@@ -1,65 +1,5 @@
-### DSU
+//Link: https://codeforces.com/edu/course/2/lesson/7/1/practice/contest/289390/problem/B
 
-```CPP
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int find(vector<int> &parent, int x) {
-    // TX:(log*n);
-    // This method returns which group/cluster x belongs to
-    return parent[x] = (parent[x] == x) ? x : find(parent, parent[x]);
-}
-
-void Union(vector<int> &parent, vector<int> &rank, int a, int b) {
-    // TX:(log*n);
-    a = find(parent, a);
-    b = find(parent, b);
-    if(a == b) return;
-    if(rank[a] >= rank[b]) {
-        rank[a]++;
-        parent[b] = a;
-    } else {
-        rank[b]++;
-        parent[a] = b;
-    }
-}
-
-
-int main() {
-
-    int n, m;
-    cin>>n>>m;
-    // n-> elements, m -> no of queries
-    vector<int> parent(n+1);
-    vector<int> rank(n+1, 0);
-    for(int i = 0; i <= n; i++) {
-        parent[i] = i;
-    }
-
-    while(m--) {
-        string str;
-        cin>>str;
-        if(str == "union") {
-            int x, y;
-            cin>>x>>y;
-            Union(parent, rank, x, y);
-        } else {
-            int x;
-            cin>>x;
-            cout<<find(parent, x)<<"\n";
-        }
-    }
-
-    return 0;
-}
-```
-
-### 1. DSU Min max size code forces
-
-Link: https://codeforces.com/edu/course/2/lesson/7/1/practice/contest/289390/problem/B
-
-```CPP
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -92,8 +32,8 @@ void Union(vector<int> &parent, vector<int> &sz, vector<int> &minimal, vector<in
 
 void file_i_o()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
     cout.tie(0);
 }
 
@@ -125,14 +65,9 @@ int main() {
             int x;
             cin>>x;
             x= find(parent, x);
-            cout<<minimal[x]<<" "<<maximal[x]<<" "<<sz[x]<<"\n";
+            cout<<minimal[x]<<" "<<maximal[x]<<" "<<sz[x]<<"\n";            
         }
     }
 
     return 0;
 }
-```
-
-### 2. Course schedule leetcode
-
-Link: https://leetcode.com/problems/course-schedule/description/
