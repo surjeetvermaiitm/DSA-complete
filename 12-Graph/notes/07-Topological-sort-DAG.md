@@ -77,3 +77,11 @@ int main() {
  * graph[i].push_back(j);
 */
 ```
+
+### 2. Course schedule leetcode
+
+Link: https://leetcode.com/problems/course-schedule/description/
+
+### 3. Alien dictionary
+
+Link: https://www.lintcode.com/problem/892/
