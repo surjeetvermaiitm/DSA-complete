@@ -72,3 +72,11 @@ int main()
     return 0;
 }
 ```
+
+### 2. Connecting cities with min cost
+
+Link: https://leetcode.ca/all/1135.html
+
+### 3. Min cost to connect all points
+
+Link: https://leetcode.com/problems/min-cost-to-connect-all-points/description/
